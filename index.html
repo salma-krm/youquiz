@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body  style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+ 
+    <div id="page-1">
+        <div class="d-flex flex-column justify-content-center align-items-center   " style=" height: 100vh; font-family: Georgia, 'Times New Roman', Times, serif;"  >
+            <h1 id="quiz" >hello in quiz</h1>
+            <p id="quizz1" >click pour commencer le quiz</p>
+            <button  id="startbtn" class="btn btn-success" >start</button>
+        </div>
+    </div>
+
+
+    <div id="qplace" style="display: none; width: 60%; height: 50%;" >
+       
+        <div id="question" style="display: flex;justify-content: center; font-size: xx-large; font-family: Georgia, 'Times New Roman', Times, serif; "></div>
+        <br>
+        <div class="col m-2 text-center "   >
+            <div class="d-flex  justify-content-around " >
+                 <div  style="width: 40px;height: 5px; background-color: rgba(255, 255, 255, 0.315); display: flex; justify-content:flex-start; align-items: center; border-radius: 10px;font-family: Georgia, 'Times New Roman', Times, serif;"  class="col mx-1 pointer  p-5 m-1  " id="R1"></div>
+                <div style="width: 40px;height: 5px; background-color: rgba(255, 255, 255, 0.315); display: flex; justify-content:flex-start; align-items: center; border-radius: 10px;font-family: Georgia, 'Times New Roman', Times, serif;"   class="col mx-1 pointer  p-5 m-1  " id="R2" class="options-quiz"></div>
+            </div>
+            <div class="d-flex  justify-content-around ">
+                  <div style="width: 40px;height: 5px; background-color: rgba(255, 255, 255, 0.315); display: flex; justify-content:flex-start; align-items: center; border-radius: 10px; font-family: Georgia, 'Times New Roman', Times, serif;"   class="col pointer  p-5 m-1 " id="R3" class="options-quiz"></div>
+                 <div style="width: 40px;height: 5px; background-color: rgba(255, 255, 255, 0.315); display: flex; justify-content:flex-start; align-items: center; border-radius: 10px; font-family: Georgia, 'Times New Roman', Times, serif;"   class="col pointer  p-5 m-1" id="R4"class="options-quiz"></div>
+            </div>
+           
+          
+        </div> 
+         <div class="d-flex justify-content-around">
+        <button style="display: none;" id="precedent" class="btn-info  btn ">precedent</button>
+        <button id="next" style="height: 40px; width: 80px;" class="btn-success btn  "> next</button>
+         </div>
+      
+    </div >
+  
+    <script>
+        var result=0;
+        var nQ = 1;
+        const questions = [
+
+            
+            {
+                question: "What is the capital of France?",
+                options: [
+                    "1.Berlin",
+                    "2.Madrid",
+                    "3.Paris",
+                    "4.Rome"
+                ],
+                correctAnswer: "Paris"
+            },
+          
+            {
+                question: "What is the largest planet in our solar system?",
+                options: [
+                    "1.Earth",
+                    "2.Jupiter",
+                    "3.Mars",
+                    "4.Saturn"
+                ],
+                correctAnswer: "Jupiter"
+            },
+            {
+                question: "What is the boiling point of water?",
+                options: [
+                    "1.90 degrees Celsius",
+                    "2.100 degrees Celsius",
+                    "3.80 degrees Celsius",
+                    "4.110 degrees Celsius"
+                ],
+                correctAnswer: "100 degrees Celsius"
+            }
+           
+            
+        ];
+
+        const questionsPlace = document.getElementById("question")
+        const option1 = document.getElementById("R1")
+        const option2 = document.getElementById("R2")
+        const option3 = document.getElementById("R3")
+        const option4 = document.getElementById("R4")
+        function quizz() {
+            questionsPlace.textContent = questions[nQ - 1].question
+            option1.textContent = questions[nQ - 1].options[0]
+            option2.textContent = questions[nQ - 1].options[1]
+            option3.textContent = questions[nQ - 1].options[2]
+            option4.textContent = questions[nQ - 1].options[3]
+        }
+         quizz();
+        const next = document.getElementById("next")
+        const precedent = document.getElementById("precedent")
+        next.addEventListener('click', function (e) {
+
+            if (nQ < questions.length) {
+                nQ++
+                quizz()
+            }
+            if (nQ > 1) {
+                precedent.style.display = "block";
+            }
+            if (nQ >= questions.length) {
+                next.style.display = "none";
+            }
+
+
+        })
+
+        precedent.addEventListener('click', function (e) {
+
+            if (nQ > 1) {
+                nQ--
+                quizz()
+            }
+            if(nQ==1){
+                precedent.style.display="none";  
+                next.style.display="block";
+                quizz()
+            }
+
+
+        });
+        
+
+ 
+        const start = document.getElementById("startbtn");
+        const qplace=document.getElementById("qplace")
+        const pageOne = document.getElementById("page-1");
+        start.addEventListener('click', function(){
+
+
+            pageOne.style.display = 'none';
+
+            qplace.style.display = 'block';
+
+        });
+        
+        R1.addEventListener('click', (e) => {
+            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+                result++;
+            nQ++
+            displayQuestion()
+        })
+
+        R2.addEventListener('click', (e) => {
+            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+                result++;
+
+            nQ++
+            displayQuestion()
+
+        })
+
+        R3.addEventListener('click', (e) => {
+            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+
+                result++;
+            nQ++
+            displayQuestion()
+        })
+
+        R4.addEventListener('click', (e) => {
+            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+                result++;
+            nQ++
+            displayQuestion()
+        })
+
+        displayQuestion()
+
+        const nextBtn = document.getElementById("next")
+        nextBtn.addEventListener("click", (e) => {
+
+            nQ = nQ + 1;
+            displayQuestion()
+        })
+
+
+
+        // const quiz=document.getElementById("quiz")
+        // quiz.addEventListener('click',function(e){
+        //     e.target.style.display = "none"
+        //  document.eme
+
+        // })
+        
+        
+        // const qplace=document.getElementById("qplace")
+        //  qplace.addEventListener('click',function(e){
+            
+        //         qplace.style.display = "block";
+                
+
+
+        //  })
+         
+
+            
+
+
+
+
+
+        // </script>
+
+
+</body>
+
+</html>
