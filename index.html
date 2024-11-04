@@ -53,6 +53,7 @@
         <button id="next" style="height: 40px; width: 80px;" class="btn-success btn  "> next</button>
          </div>
       
+      
     </div >
   
     <script>
@@ -109,8 +110,10 @@
             option4.textContent = questions[nQ - 1].options[3]
         }
          quizz();
+         
         const next = document.getElementById("next")
         const precedent = document.getElementById("precedent")
+        
         next.addEventListener('click', function (e) {
 
             if (nQ < questions.length) {
@@ -121,11 +124,16 @@
                 precedent.style.display = "block";
             }
             if (nQ >= questions.length) {
-                next.style.display = "none";
+                next.textContent = "finish";
+                next.setAttribute("id","finish")
             }
+            document.querySelector("#finish").addEventListener('click',()=>{
+                alert(result)
+            })
 
 
         })
+        
 
         precedent.addEventListener('click', function (e) {
 
@@ -155,47 +163,50 @@
             qplace.style.display = 'block';
 
         });
-        
+
+
+
+
+         //   CALICULE
+
+
         R1.addEventListener('click', (e) => {
-            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+            if (e.target.textContent == questions[nQ - 1].correctAnswer)
                 result++;
-            nQ++
-            displayQuestion()
+            quizz()
         })
-
         R2.addEventListener('click', (e) => {
-            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+            if (e.target.textContent == questions[nQ - 1].correctAnswer)
                 result++;
-
-            nQ++
-            displayQuestion()
-
+            quizz()
         })
-
         R3.addEventListener('click', (e) => {
-            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
-
+            if (e.target.textContent == questions[nQ - 1].correctAnswer)
                 result++;
-            nQ++
-            displayQuestion()
+            quizz()
         })
-
         R4.addEventListener('click', (e) => {
-            if (e.target.textContent == questions[nbQ - 1].correctAnswer)
+            if (e.target.textContent == questions[nQ - 1].correctAnswer)
                 result++;
-            nQ++
-            displayQuestion()
+            
+            quizz()
         })
-
-        displayQuestion()
 
         const nextBtn = document.getElementById("next")
         nextBtn.addEventListener("click", (e) => {
 
             nQ = nQ + 1;
-            displayQuestion()
+            quizz()
         })
 
+    
+
+        
+       
+        // calculer le score :
+
+
+        
 
 
         // const quiz=document.getElementById("quiz")
